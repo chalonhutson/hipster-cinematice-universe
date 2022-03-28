@@ -21,6 +21,6 @@ def connect_to_db(app):
 
 
 if __name__ == "__main__":
-    from . import app
+    from __init__ import app
     connect_to_db(app)
     print("Connected to DB.")

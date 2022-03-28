@@ -1,5 +1,4 @@
 from flask import Flask, jsonify
-from model import Users_info
 
 
 app = Flask(__name__)
