@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react'
 import './App.css';
 
 function App() {
+
+  const [words, setWords] = useState(null)
+
+
+  
+  useEffect(() => {
+    fetch('/hello').then(res => {res.json().then(data => console.log(data.data))}).catch(err => console.log(err))
+  }, [])
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {words}
+      <input onChange={e => setWords(e.target.value)} />
+      <button onClick={() => {
+        fetch('/add-admin/'+words).then(res => console.log(res))
+      }
+      } >Click</button>
     </div>
   );
 }
