@@ -4,6 +4,7 @@ import './App.css';
 function App() {
 
   const [words, setWords] = useState(null)
+  const [admins, setAdmins] = useState([])
 
 
   
@@ -21,6 +22,8 @@ function App() {
         fetch('/add-admin/'+words).then(res => console.log(res))
       }
       } >Click</button>
+      <div>
+      </div>
     </div>
   );
 }
