@@ -6,7 +6,7 @@
 
 ### Server
 #### cd server
-#### Create and activate virtual environment
+#### Create and activate virtual environment (Python 3.9 recommended)
 #### pip install -r requirements.txt
 #### python app.py
 
