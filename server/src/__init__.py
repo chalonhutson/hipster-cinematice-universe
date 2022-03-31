@@ -23,10 +23,13 @@ def hello_world():
 
 @app.route("/add-admin/<string:username>")
 def add_admin(username):
-    res = ctrl.add_admin({"username": username, "password": "pass"})
+    res = ctrl.add_admin(
+        {"username": username,
+        "password": "pass"}
+        )
 
     if res:
-        return 201
+        return jsonify({"res": "success"}), 201
     else:
-        return 404
+        return jsonify({"res": "failed"}), 404
 
