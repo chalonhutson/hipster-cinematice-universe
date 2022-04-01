@@ -3,23 +3,30 @@ import './App.css';
 
 function App() {
 
-  const [words, setWords] = useState(null)
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
   const [admins, setAdmins] = useState([])
-
-
-  
-  useEffect(() => {
-    fetch('/hello').then(res => {res.json().then(data => console.log(data.data))}).catch(err => console.log(err))
-  }, [])
-
 
 
   return (
     <div className="App">
-      {words}
-      <input onChange={e => setWords(e.target.value)} />
+      
+      <h2>Username:</h2>
+      <input onChange={e => setUsername(e.target.value)} />
+      <h2>Password:</h2>
+      <input type="password" onChange={e => setPassword(e.target.value)} />
+
       <button onClick={() => {
-        fetch('/add-admin/'+words).then(res => console.log(res))
+        fetch('/add-admin/', {
+          method: 'POST',
+          body: JSON.stringify(
+            {
+              username: username,
+              password: password
+            }
+          )
+        })
+        .then(res => res.json().then(data => console.log(data)))
       }
       } >Click</button>
       <div>

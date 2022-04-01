@@ -1,6 +1,6 @@
 from os import environ
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -8,8 +8,11 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///test.db'
+app.config["ENV"] = "development"
+app.config["SQLALCHEMY_DATABASE_URI"] = environ["POSTGRES_URI"]
+print(app.config["SQLALCHEMY_DATABASE_URI"])
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+
 
 db = SQLAlchemy(app)
 
@@ -21,15 +24,17 @@ import src.controller as ctrl
 def hello_world():
     return jsonify({"data": "Hello, World!"})
 
-@app.route("/add-admin/<string:username>")
-def add_admin(username):
-    res = ctrl.add_admin(
-        {"username": username,
-        "password": "pass"}
-        )
+@app.route("/add-admin/", methods=["POST"])
+def add_admin():
+    print(request.get_data())
+    return jsonify({"res": "Cool beans"}), 201
+    # res = ctrl.add_admin(
+    #     {"username": username,
+    #     "password": generate_password_hash(password)}
+    #     )
 
-    if res:
-        return jsonify({"res": "success"}), 201
-    else:
-        return jsonify({"res": "failed"}), 404
+    # if res:
+    #     return jsonify({"res": "success"}), 201
+    # else:
+    #     return jsonify({"res": "failed"}), 404
 
