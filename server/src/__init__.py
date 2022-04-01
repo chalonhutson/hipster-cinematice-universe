@@ -27,14 +27,24 @@ def hello_world():
 @app.route("/add-admin/", methods=["POST"])
 def add_admin():
     print(request.get_data())
-    return jsonify({"res": "Cool beans"}), 201
-    # res = ctrl.add_admin(
-    #     {"username": username,
-    #     "password": generate_password_hash(password)}
-    #     )
+    return jsonify({"res": "Cool beans"})
 
-    # if res:
-    #     return jsonify({"res": "success"}), 201
-    # else:
-    #     return jsonify({"res": "failed"}), 404
+    res = ctrl.add_admin(
+        {
+        "username": req["username"],
+        "password": generate_password_hash(req["password"])
+        }
+    )
 
+    if res:
+        return jsonify({"res": "success"}), 201
+    else:
+        return jsonify({"res": "failed"}), 404
+        
+
+@app.route("/login", methods=["POST"])
+def login():
+    req = request.get_data()
+
+    if req["is_admin"] == True:
+        pass
