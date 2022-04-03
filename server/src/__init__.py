@@ -10,7 +10,6 @@ app = Flask(__name__)
 
 app.config["ENV"] = "development"
 app.config["SQLALCHEMY_DATABASE_URI"] = environ["POSTGRES_URI"]
-print(app.config["SQLALCHEMY_DATABASE_URI"])
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 
 
