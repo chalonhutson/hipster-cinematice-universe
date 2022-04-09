@@ -47,3 +47,8 @@ def login():
 
     if req["is_admin"] == True:
         pass
+
+
+@app.route("/get_messages/<viewer_id>")
+def get_messages(viewer_id):
+    return jsonify(ctrl.get_viewer_messages(viewer_id))

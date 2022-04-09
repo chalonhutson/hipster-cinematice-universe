@@ -40,18 +40,35 @@ def connect_to_db(app):
 
 def create_dummy_data():
     hipster = Admin(username="hipstergw", password="password")
-    viewer1 = Viewer(twitch_name="frank", timezone=1, password="password")
-    viewer2 = Viewer(twitch_name="stan", timezone=5, password="password")
-    message1 = Chat_message(viewer_id=1, message_content="whaddup homies", message_datetime=datetime.now())
-    message2 = Chat_message(viewer_id=1, message_content="yo yo yo", message_datetime=datetime.now())
-    message3 = Chat_message(viewer_id=2, message_content="let's do this", message_datetime=datetime.now())
-    message4 = Chat_message(viewer_id=2, message_content="oooooooohhhhhh snap", message_datetime=datetime.now())
+    viewer1 = Viewer(twitch_name="Jack", timezone=1, password="password")
+    viewer2 = Viewer(twitch_name="Kim", timezone=2, password="password")
+    viewer3 = Viewer(twitch_name="Tony", timezone=3, password="password")
+    viewer4 = Viewer(twitch_name="David", timezone=4, password="password")
+    viewer5 = Viewer(twitch_name="Nina", timezone=6, password="password")
+    viewer6 = Viewer(twitch_name="Chloe", timezone=7, password="password")
+    message1 = Chat_message(viewer_id=1, message_content="son of a bitch", message_datetime=datetime.now())
+    message2 = Chat_message(viewer_id=1, message_content="goddamit", message_datetime=datetime.now())
+    message3 = Chat_message(viewer_id=1, message_content="TELL ME WHERE THE BOMB IS!!!!", message_datetime=datetime.now())
+    message4 = Chat_message(viewer_id=2, message_content="DAAAAADDD!!!!", message_datetime=datetime.now())
+    message5 = Chat_message(viewer_id=3, message_content="iM DA pReSiDeNt!!!", message_datetime=datetime.now())
 
     data_list = [hipster, viewer1, viewer2, message1, message2, message3, message4]
 
     for data in data_list:
         db.session.add(data)
     
+    db.session.commit()
+
+def delete_all_data():
+    admins = Admin.query.all()
+    viewers = Viewer.query.all()
+    messages = Chat_message.query.all()
+
+    delete_list = admins + viewers + messages
+
+    for i in delete_list:
+        db.session.delete(i)
+
     db.session.commit()
 
 
