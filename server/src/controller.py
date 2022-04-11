@@ -18,10 +18,25 @@ def get_viewer_messages(viewer_id):
 
     return [
         {
-            "message_id": message.id,
-            "message_content": message.message_content,
-            "message_datetime": message.message_datetime
+            "id": message.id,
+            "content": message.content,
+            "datetime": message.datetime,
+            "hipster-points": message.hipster_points,
+            "fulfilled": message.fulfilled,
         }
 
         for message in messages
+    ]
+
+def get_viewer_redemptions(viewer_id):
+    redemptions = Redemption.query.filter_by(viewer_id = viewer_id).all()
+
+    return [
+        {
+            "id": redemption.id,
+            "content": redemption.redemption,
+            "message_datetime": redemption.datetime
+        }
+
+        for redemption in redemptions
     ]
