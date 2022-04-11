@@ -31,6 +31,18 @@ class Chat_message(db.Model):
     viewer_id = db.Column(db.Integer, db.ForeignKey("viewer.id"), nullable=False)
     message_content = db.Column(db.String(5000), nullable=False)
     message_datetime = db.Column(db.DateTime, nullable=False)
+    hipster_points = db.Column(db.Integer, default=1, nullable=False)
+    fulfilled = db.Column(db.Boolean, nullable=False, default=True)
+    hipster_notes = db.Column(db.String(5000), nullable=True)
+
+class Redemption(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    viewer_id = db.Column(db.Integer, db.ForeignKey("viewer.id"), nullable=False)
+    redemption = db.Column(db.String(5000), nullable=False)
+    hipster_points = db.Column(db.Integer, default=1, nullable=False)
+    fulfilled = db.Column(db.Boolean, nullable=False, default=True)
+    hipster_notes = db.Column(db.String(5000), nullable=True)
+
 
 def connect_to_db(app):
     db.app = app
@@ -46,18 +58,20 @@ def create_dummy_data():
     viewer4 = Viewer(twitch_name="David", timezone=4, password="password")
     viewer5 = Viewer(twitch_name="Nina", timezone=6, password="password")
     viewer6 = Viewer(twitch_name="Chloe", timezone=7, password="password")
-    message1 = Chat_message(viewer_id=1, message_content="son of a bitch", message_datetime=datetime.now())
-    message2 = Chat_message(viewer_id=1, message_content="goddamit", message_datetime=datetime.now())
+    message1 = Chat_message(viewer_id=1, message_content="goddamit", message_datetime=datetime.now())
+    message2 = Chat_message(viewer_id=1, message_content="GIVE ME MY DAUGHTER!!!!", message_datetime=datetime.now())
     message3 = Chat_message(viewer_id=1, message_content="TELL ME WHERE THE BOMB IS!!!!", message_datetime=datetime.now())
     message4 = Chat_message(viewer_id=2, message_content="DAAAAADDD!!!!", message_datetime=datetime.now())
     message5 = Chat_message(viewer_id=3, message_content="iM DA pReSiDeNt!!!", message_datetime=datetime.now())
+    redemption1 = Redemption(viewer_id=1, redemption="Shout out!")
 
-    data_list = [hipster, viewer1, viewer2, message1, message2, message3, message4]
+    data_list = [hipster, viewer1, viewer2, message1, message2, message3, message4, message5, redemption1]
 
     for data in data_list:
         db.session.add(data)
+        db.session.commit()
     
-    db.session.commit()
+    
 
 def delete_all_data():
     admins = Admin.query.all()
