@@ -1,6 +1,6 @@
 from os import environ
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, json
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -22,6 +22,14 @@ import src.controller as ctrl
 @app.route('/hello')
 def hello_world():
     return jsonify({"data": "Hello, World!"})
+
+@app.route("/check-admin", methods=["POST"])
+def check_admin():
+    check = ctrl.check_admin(request.form)
+    if check:
+        return "success"
+    else:
+        return "fail"
 
 @app.route("/add-admin/", methods=["POST"])
 def add_admin():
@@ -54,5 +62,5 @@ def get_messages(viewer_id):
     return jsonify(ctrl.get_viewer_messages(viewer_id))
 
 @app.route("/get_redemptions/<viewer_id>")
-def get_messages(viewer_id):
+def get_redemptions(viewer_id):
     return jsonify(ctrl.get_viewer_redemptions(viewer_id))

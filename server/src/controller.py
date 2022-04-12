@@ -13,6 +13,13 @@ def add_admin(admin):
     except:
         return False
 
+def check_admin(admin):
+    try:
+        admin = Admin.query.filter_by(username=admin["username"], password=admin["password"]).one()
+        return True
+    except:
+        return False
+
 def get_viewer_messages(viewer_id):
     messages = Chat_message.query.filter_by(viewer_id = viewer_id).all()
 
