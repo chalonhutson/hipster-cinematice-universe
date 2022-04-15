@@ -3,9 +3,14 @@ import React, { useState, useEffect } from 'react'
 export default function ViewerStats() {
 
   const [messages, setMessages] = useState([])
+  const [redemptions, setRedemptions] = useState([])
 
   useEffect(() => {
-    fetch("/get_messages/1").then(res => res.json()).then(data => {
+    fetch("/get-messages/1").then(res => res.json()).then(data => {
+      setMessages(data)
+    })
+    
+    fetch("/get-redemptions/1").then(res => res.json()).then(data => {
       setMessages(data)
     })
   }, [])
@@ -21,6 +26,7 @@ export default function ViewerStats() {
 
   return (
     <div>
+      <div>
         <h1>Viewer Stats</h1>
         <div>
           <h2>Messages</h2>
@@ -28,6 +34,14 @@ export default function ViewerStats() {
           { deliveredMessages }
           
         </div>
+      </div>
+      <div>
+        <h1>Viewer Redemptions</h1>
+        <div>
+          <h2>Redemptions</h2>
+
+        </div>
+      </div>
     </div>
   )
 }
