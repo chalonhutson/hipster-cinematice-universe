@@ -1,6 +1,6 @@
 from werkzeug.security import check_password_hash
 from src import db
-from src.model import Admin, Viewer, Chat_message
+from src.model import Admin, Viewer, Chat_message, Redemption
 
 
 def add_admin(admin):

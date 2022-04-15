@@ -57,10 +57,10 @@ def login():
         pass
 
 
-@app.route("/get_messages/<viewer_id>")
+@app.route("/get-messages/<viewer_id>")
 def get_messages(viewer_id):
     return jsonify(ctrl.get_viewer_messages(viewer_id))
 
-@app.route("/get_redemptions/<viewer_id>")
+@app.route("/get-redemptions/<viewer_id>")
 def get_redemptions(viewer_id):
     return jsonify(ctrl.get_viewer_redemptions(viewer_id))
