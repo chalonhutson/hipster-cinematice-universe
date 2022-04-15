@@ -52,21 +52,22 @@ def connect_to_db(app):
 
 
 def create_dummy_data():
-    hipster = Admin(username="hipstergw", password="password")
-    viewer1 = Viewer(twitch_name="Jack", timezone=1, password="password")
-    viewer2 = Viewer(twitch_name="Kim", timezone=2, password="password")
-    viewer3 = Viewer(twitch_name="Tony", timezone=3, password="password")
-    viewer4 = Viewer(twitch_name="David", timezone=4, password="password")
-    viewer5 = Viewer(twitch_name="Nina", timezone=6, password="password")
-    viewer6 = Viewer(twitch_name="Chloe", timezone=7, password="password")
-    message1 = Chat_message(viewer_id=1, content="goddamit", datetime=datetime.now())
-    message2 = Chat_message(viewer_id=1, content="GIVE ME MY DAUGHTER!!!!", datetime=datetime.now())
-    message3 = Chat_message(viewer_id=1, content="TELL ME WHERE THE BOMB IS!!!!", datetime=datetime.now())
-    message4 = Chat_message(viewer_id=2, content="DAAAAADDD!!!!", datetime=datetime.now())
-    message5 = Chat_message(viewer_id=3, content="iM DA pReSiDeNt!!!", datetime=datetime.now())
-    redemption1 = Redemption(viewer_id=1, redemption="Shout out!")
 
-    data_list = [hipster, viewer1, viewer2, message1, message2, message3, message4, message5, redemption1]
+    data_list = [
+        Admin(username="hipstergw", password="password"),
+        Viewer(twitch_name="Jack", timezone=1, password="password"),
+        Viewer(twitch_name="Kim", timezone=2, password="password"),
+        Viewer(twitch_name="Tony", timezone=3, password="password"),
+        Viewer(twitch_name="David", timezone=4, password="password"),
+        Viewer(twitch_name="Nina", timezone=6, password="password"),
+        Viewer(twitch_name="Chloe", timezone=7, password="password"),
+        Chat_message(viewer_id=1, content="goddamit", datetime=datetime.now()),
+        Chat_message(viewer_id=1, content="GIVE ME MY DAUGHTER!!!!", datetime=datetime.now()),
+        Chat_message(viewer_id=1, content="TELL ME WHERE THE BOMB IS!!!!", datetime=datetime.now()),
+        Chat_message(viewer_id=2, content="DAAAAADDD!!!!", datetime=datetime.now()),
+        Chat_message(viewer_id=3, content="iM DA pReSiDeNt!!!", datetime=datetime.now()),
+        Redemption(viewer_id=1, redemption="Shout out!", hipster_points=1, datetime=datetime.now()),
+    ]
 
     for data in data_list:
         db.session.add(data)
@@ -94,3 +95,7 @@ if __name__ == "__main__":
     # from __init__ import app
     connect_to_db(app)
     print("Connected to DB.")
+    print(f"Admins = {Admin.query.count()}")
+    print(f"Viewers = {Viewer.query.count()}")
+    print(f"Messages = {Chat_message.query.count()}")
+    print(f"Redemptions = {Redemption.query.count()}")
