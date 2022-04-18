@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
 import '../App.css'
 
-export default function LoginRegister() {
+export default function LoginRegister({ callbackSetViewerId }) {
 
     const [loginUsername, setLoginUsername] = useState("")
     const [loginPassword, setLoginPassword] = useState("")
     const [loginAdminViewer, setLoginAdminViewer] = useState("Viewer")
+ 
+    function getViewerIdFromServer(username) {
+        let viewerId = null
+        fetch(`/get-viewer-id/${username}`)
+        .then(res => res.json())
+        .then(data => {
+           viewerId = data.viewer_id
+        })
+        return viewerId
+    }
 
     return (
         <div>
@@ -18,7 +28,13 @@ export default function LoginRegister() {
                 <div className="buttons">
                     <button 
                         className={loginAdminViewer === "Viewer" ? "buttonSelected" : "buttonUnselected"} 
-                        onClick={() => setLoginAdminViewer("Viewer")}
+                        onClick={() => {
+                            setLoginAdminViewer("Viewer")
+                            const viewerId = getViewerIdFromServer(loginUsername)
+
+                            callbackSetViewerId(viewerId)
+                        }
+                        }
                     >
                         Viewer
                     </button>

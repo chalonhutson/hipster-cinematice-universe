@@ -47,3 +47,10 @@ def get_viewer_redemptions(viewer_id):
 
         for redemption in redemptions
     ]
+
+def get_viewer_id(name):
+    viewer = Viewer.query.filter_by(twitch_name = name).first()
+    if viewer:
+        return {"viewer_id": viewer.id}
+    else:
+        return {"viewer_id": None}

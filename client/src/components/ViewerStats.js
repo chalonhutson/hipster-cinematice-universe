@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export default function ViewerStats() {
+export default function ViewerStats({ viewerId }) {
 
   const [messages, setMessages] = useState([])
   const [redemptions, setRedemptions] = useState([])
