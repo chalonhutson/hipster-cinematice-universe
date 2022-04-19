@@ -12,7 +12,7 @@ export default function LoginRegister({ callbackSetViewerId }) {
         fetch(`/get-viewer-id/${username}`)
         .then(res => res.json())
         .then(data => {
-           viewerId = data.viewer_id
+            callbackSetViewerId(data.viewer_id)
         })
         return viewerId
     }
@@ -30,9 +30,7 @@ export default function LoginRegister({ callbackSetViewerId }) {
                         className={loginAdminViewer === "Viewer" ? "buttonSelected" : "buttonUnselected"} 
                         onClick={() => {
                             setLoginAdminViewer("Viewer")
-                            const viewerId = getViewerIdFromServer(loginUsername)
-
-                            callbackSetViewerId(viewerId)
+                            getViewerIdFromServer(loginUsername)
                         }
                         }
                     >
