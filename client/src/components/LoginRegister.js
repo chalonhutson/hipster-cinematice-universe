@@ -8,7 +8,6 @@ export default function LoginRegister({ callbackSetViewerId }) {
     const [loginAdminViewer, setLoginAdminViewer] = useState("Viewer")
  
     function getViewerIdFromServer(username) {
-        let viewerId = null
         fetch(`/get-viewer-id/${username}`)
         .then(res => res.json())
         .then(data => {
