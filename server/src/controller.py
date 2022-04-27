@@ -1,4 +1,3 @@
-from werkzeug.security import check_password_hash
 from src import db
 from src.model import Admin, Viewer, Chat_message, Redemption
 
