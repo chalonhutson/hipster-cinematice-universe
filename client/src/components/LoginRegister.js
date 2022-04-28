@@ -13,7 +13,6 @@ export default function LoginRegister({ callbackSetViewerId }) {
         .then(data => {
             callbackSetViewerId(data.viewer_id)
         })
-        return viewerId
     }
 
     return (
