@@ -14,7 +14,7 @@ function App() {
       <button onClick={() => setPage("LoginRegister")}>Login Register Page</button>
       <button onClick={() => setPage("ViewerStats")}>Viewer Stats</button>
       { page === "LoginRegister" ? <LoginRegister callbackSetViewerId={ setViewerId } /> : null }
-      { page === "ViewerStats" ? <ViewerStats viewerId={viewerId} /> : null }
+      { page === "ViewerStats" ? <ViewerStats viewerId={ {viewerId: viewerId} } /> : null }
     </div>
   );
 }

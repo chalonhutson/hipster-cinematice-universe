@@ -59,6 +59,7 @@ def login():
 
 @app.route("/get-messages/<viewer_id>")
 def get_messages(viewer_id):
+    print(viewer_id)
     return jsonify(ctrl.get_viewer_messages(viewer_id))
 
 @app.route("/get-redemptions/<viewer_id>")
