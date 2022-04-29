@@ -6,7 +6,7 @@ import ViewerStats from './components/ViewerStats'
 function App() {
 
   const [page, setPage] = useState("LoginRegister")
-  const [viewerId, setViewerId] = useState(1)
+  const [viewerId, setViewerId] = useState(7)
 
   return (
     <div className="App">

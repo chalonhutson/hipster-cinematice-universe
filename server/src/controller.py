@@ -41,7 +41,7 @@ def get_viewer_redemptions(viewer_id):
         {
             "id": redemption.id,
             "content": redemption.redemption,
-            "message_datetime": redemption.datetime
+            "datetime": redemption.datetime
         }
 
         for redemption in redemptions

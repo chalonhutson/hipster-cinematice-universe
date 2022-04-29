@@ -17,9 +17,18 @@ export default function ViewerStats({ viewerId }) {
   
   const deliveredMessages = messages.map((i) => {
     return (
-      <div key={i.message_id}>
-      <h4 key={`Message ${i.message_id.toString()}`}>Message: {i.message_content}</h4>
-      <h4 key={`Datetime ${i.message_id.toString()}`}>Message Date: {i.message_datetime}</h4>
+      <div key={i.id}>
+      <h4 key={`Message ${i.id}`}>Message: {i.content}</h4>
+      <h4 key={`Datetime ${i.id}`}>Message Date: {i.datetime}</h4>
+    </div>
+    )
+  })
+
+  const deliveredRedemptions = redemptions.map((i) => {
+    return (
+      <div key={i.id}>
+      <h4 key={`Message ${i.id}`}>Message: {i.content}</h4>
+      <h4 key={`Datetime ${i.id}`}>Message Date: {i.datetime}</h4>
     </div>
     )
   })
@@ -31,9 +40,7 @@ export default function ViewerStats({ viewerId }) {
         <div>
           <h2>Messages</h2>
 
-          {console.log(`/get-messages/${viewerId.viewerId}`)}
           { deliveredMessages }
-          
           
         </div>
       </div>
@@ -41,6 +48,8 @@ export default function ViewerStats({ viewerId }) {
         <h1>Viewer Redemptions</h1>
         <div>
           <h2>Redemptions</h2>
+          
+          { deliveredRedemptions }
 
         </div>
       </div>
