@@ -48,8 +48,8 @@ def get_viewer_redemptions(viewer_id):
     ]
 
 def get_viewer_id(name):
-    viewer = Viewer.query.filter_by(twitch_name = name).first()
-    if viewer:
+    try:
+        viewer = Viewer.query.filter_by(twitch_name = name).one()
         return {"viewer_id": viewer.id}
-    else:
+    except:
         return {"viewer_id": None}
