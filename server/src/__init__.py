@@ -52,9 +52,11 @@ def add_admin():
 @app.route("/login", methods=["POST"])
 def login():
     req = request.get_data()
+    print(req)
+    # if req["is_admin"] == True:
+        # pass
 
-    if req["is_admin"] == True:
-        pass
+    return "success"
 
 
 @app.route("/get-messages/<viewer_id>")

@@ -15,6 +15,22 @@ export default function LoginRegister({ callbackSetViewerId }) {
         })
     }
 
+    function attemptLogin() {
+        console.log("attempted")
+        fetch('/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                username: loginUsername,
+                password: loginPassword
+            })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('Success:', data)
+            })
+        
+    }
+
     return (
         <div>
             <h2>Login</h2>
@@ -41,6 +57,7 @@ export default function LoginRegister({ callbackSetViewerId }) {
                         Admin
                     </button>
                 </div>
+                <button onClick={() => attemptLogin()}>Login</button>
 
             </div>
         </div>
