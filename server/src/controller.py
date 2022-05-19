@@ -14,7 +14,7 @@ def add_admin(admin):
 
 def check_admin(admin):
     try:
-        admin = Admin.query.filter_by(username=admin["username"], password=admin["password"]).one()
+        admin = Admin.query.filter_by(username=admin["username"]).one()
         return True
     except:
         return False
